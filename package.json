@@ -5,7 +5,7 @@
   "main": "src/index",
   "repository": "git@github.com:tjs-pro-gg/voice-coin.git",
   "author": "SharifPoetra <sharifpoetra1@gmail.com>",
-  "license": "GNU",
+  "license": "GPL-3.0",
   "private": true,
   "files": ["src/", "typings/"],
   "types": "typings/index.d.ts",
