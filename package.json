@@ -1,6 +1,6 @@
 {
   "name": "voice-utility",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A voice utility to add level and coin when user joining a voice channel",
   "main": "src/index",
   "repository": "git@github.com:tjs-pro-gg/voice-utility.git",
