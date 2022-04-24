@@ -10,8 +10,8 @@ const User = require("./User.js");
 /**
  * Voice Manager
  * @example
- * // Requires Manager from discord-voice
- * const { VoiceManager } = require("discord-voice");
+ * // Requires Manager from voice-utility
+ * const { VoiceManager } = require("voice-utility");
  * // Create a new instance of the manager class
  * const manager = new VoiceManager(client, {
  * userStorage: "./users.json",
