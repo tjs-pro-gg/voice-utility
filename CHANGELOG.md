@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.7](https://github.com/tjs-pro-gg/voice-utility/compare/v1.1.6...v1.1.7) (2022-04-24)
+
+
+### Bug Fixes
+
+* incorrect module ([b61cedb](https://github.com/tjs-pro-gg/voice-utility/commit/b61cedb9d8638487b7e73580284202f090e68a4f))
+* typings ([4fcdd8d](https://github.com/tjs-pro-gg/voice-utility/commit/4fcdd8d8685cbf8898a62e8a45c2225af3dfda72))
+
 ### [1.1.6](https://github.com/tjs-pro-gg/voice-utility/compare/v1.1.5...v1.1.6) (2022-04-24)
 
 ### [1.1.5](https://github.com/tjs-pro-gg/voice-utility/compare/v1.1.4...v1.1.5) (2022-04-24)
