@@ -103,7 +103,7 @@ client.on("messageCreate", (message) => {
             xpAmountToAdd: () => Math.floor(Math.random() * 10) + 1, // The amount of xp to add to the user (This is a function).
             voiceTimeToAdd: () => 1000, // The amount of time in ms to add to the user (This is a function).
             voiceTimeTrackingEnabled: true, // Whether the voiceTimeTracking module is enabled.
-            levelingTrackingEnabled: true // Whether the levelingTracking module is enabled.
+            levelingTrackingEnabled: true, // Whether the levelingTracking module is enabled.
             coinTrackingEnabled: true // Whether the coinTracking module is enabled.
         });
     }
@@ -309,7 +309,7 @@ const { Client, Intents } = require("discord.js"), // npm install discord.js
         intents: [Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] // The GUILD_VOICE_STATES and GUILDS intents are required for voice-utility to function.
     }),
     settings = {
-        prefix: "v!",
+        prefix: "!",
         token: "Your Discord Bot Token"
     };
 
