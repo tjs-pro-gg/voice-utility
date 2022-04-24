@@ -1,4 +1,4 @@
-declare module "discord-voice" {
+declare module "voice-utility" {
     import { EventEmitter } from "events";
     import { Client, PermissionResolvable, User as DiscordUser, Snowflake, GuildMember, VoiceChannel, Guild } from "discord.js";
 
