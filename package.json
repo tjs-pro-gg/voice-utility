@@ -1,7 +1,7 @@
 {
   "name": "voice-coin",
   "version": "1.0.0",
-  "description": "A voice utility to add coin when user joining a voice channel",
+  "description": "A voice utility to add level and coin when user joining a voice channel",
   "main": "src/index",
   "repository": "git@github.com:tjs-pro-gg/voice-coin.git",
   "author": "SharifPoetra <sharifpoetra1@gmail.com>",
