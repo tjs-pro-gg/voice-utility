@@ -14,10 +14,10 @@
 # Installation
 
 ```bash
-yarn add github:tjs-pro-gg/voice-utility
+npm install github:tjs-pro-gg/voice-utility
 ```
 
-# Usage of the modudle
+# Usage of the module
 
 ```js
 const { Client, Intents } = require("discord.js"),
