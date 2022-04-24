@@ -72,10 +72,14 @@ class VoiceManager extends EventEmitter {
      * @example
      * manager.createUser(message.author.id, message.guild.id, {
      *      levelingData: {
-     *      xp: 0,
-     *      level: 0,
+     *        xp: 0,
+     *        level: 0
      *      },
-     *      // The user will have 0 xp and 0 level.
+     *      coinData {
+     *        point: 0,
+     *        coin: 0
+     *      }
+     *      // The user will have 0 xp, 0 level, 0 point and 0 coin.
      * });
      */
     createUser(userId, guildId, options) {
@@ -120,14 +124,20 @@ class VoiceManager extends EventEmitter {
      *      trackDeaf: true, // It will track users if they are deafen aswell.
      *      minUserCountToParticipate: 0, // The min amount of users to be in a channel to be tracked.
      *      maxUserCountToParticipate: 0, // The max amount of users to be in a channel to be tracked.
+     *      minPointToParticipate: 0, // The min amount of point needed to be tracked.
+     *      minCoinToParticipate: 0, // The min coin needed to be tracked.
      *      minXpToParticipate: 0, // The min amount of xp needed to be tracked.
      *      minLevelToParticipate: 0, // The min level needed to be tracked.
+     *      maxPointToParticipate: 0, // The max amount of point needed to be tracked.
+     *      maxCoinToParticipate: 0, // The max coin needed to be tracked.
      *      maxXpToParticipate: 0, // The max amount of xp needed to be tracked.
      *      maxLevelToParticipate: 0, // The max level needed to be tracked.
      *      xpAmountToAdd: () => Math.floor(Math.random() * 10) + 1, // The amount of xp to add to the user (This is a function).
      *      voiceTimeToAdd: () => 1000, // The amount of time in ms to add to the user (This is a function).
      *      voiceTimeTrackingEnabled: true, // Whether the voiceTimeTracking module is enabled.
      *      levelingTrackingEnabled: true, // Whether the levelingTracking module is enabled.
+     *      coinTrackingEnabled: true, // Whether the coinTracking module is enabled.
+     *      pointMultiplier: () => 0.1, // This will set point multiplier to 0.1 (This is a function).
      *      levelMultiplier: () => 0.1, // This will set level multiplier to 0.1 (This is a function).
      * });
      */
@@ -487,6 +497,29 @@ class VoiceManager extends EventEmitter {
                          *
                          */
                         this.emit("userLevelUp", oldUser, user);
+                    }
+                }
+
+                if (config.coinTrackingEnabled) {
+                    user.coinData.point += await config.pointAmountToAdd();
+                    user.coinData.coin = Math.floor((await config.pointMultiplier()) * Math.sqrt(user.coinData.point));
+                    /**
+                     * Emitted when point is added to the user.
+                     * @event VoiceManager#userPointAdd
+                     * @param {User} oldUser The user before the update
+                     * @param {User} newUser The user after the update
+                     *
+                     */
+                    this.emit("userPointAdd", oldUser, user);
+                    if (user.coinData.coin > oldUser.coinData.coin) {
+                        /**
+                         * Emitted when the user coins up.
+                         * @event VoiceManager#userCoinUp
+                         * @param {User} oldUser The user before the update
+                         * @param {User} newUser The user after the update
+                         *
+                         */
+                        this.emit("userCoinUp", oldUser, user);
                     }
                 }
                 await this.editUser(user.userId, user.guildId, user.data);

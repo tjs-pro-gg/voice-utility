@@ -90,6 +90,22 @@ class Config extends EventEmitter {
     }
 
     /**
+     * The min amount of point the user needs to have to be tracked (0 is equal to no limit).
+     * @type {Number}
+     */
+     get minPointToParticipate() {
+        return this.options.minPointToParticipate || this.manager.options.default.minPointToParticipate;
+    }
+
+    /**
+     * The min amount of coin the user needs to have to be tracked (0 is equal to no limit).
+     * @type {Number}
+     */
+     get minCoinToParticipate() {
+        return this.options.minCoinToParticipate || this.manager.options.default.minCoinToParticipate;
+    }
+
+    /**
      * The min amount of xp the user needs to have to be tracked (0 is equal to no limit).
      * @type {Number}
      */
@@ -103,6 +119,22 @@ class Config extends EventEmitter {
      */
     get minLevelToParticipate() {
         return this.options.minLevelToParticipate || this.manager.options.default.minLevelToParticipate;
+    }
+
+    /**
+     * The max amount of point the user can be tracked uptil (0 is equal to no limit).
+     * @type {Number}
+     */
+     get maxPointToParticipate() {
+        return this.options.maxPointToParticipate || this.manager.options.default.maxPointToParticipate;
+    }
+
+    /**
+     * The max amount of coin the user can be tracked uptil (0 is equal to no limit).
+     * @type {Number}
+     */
+     get maxCoinToParticipate() {
+        return this.options.maxCoinToParticipate || this.manager.options.default.maxCoinToParticipate;
     }
 
     /**
@@ -138,6 +170,14 @@ class Config extends EventEmitter {
     }
 
     /**
+     * Whether the leveling tracking module is enabled.
+     * @type {Boolean}
+     */
+     get coinTrackingEnabled() {
+        return this.options.coinTrackingEnabled || this.manager.options.default.coinTrackingEnabled;
+    }
+
+    /**
      * The raw config object for this guild's config.
      * @type {ConfigData}
      */
@@ -156,14 +196,18 @@ class Config extends EventEmitter {
                 isEnabled: this.options.isEnabled,
                 minUserCountToParticipate: this.options.minUserCountToParticipate,
                 maxUserCountToParticipate: this.options.maxUserCountToParticipate,
+                minPointToParticipate: this.options.minPointToParticipate,
+                minCoinToParticipate: this.options.minCoinToParticipate,
                 minXpToParticipate: this.options.minXpToParticipate,
                 minLevelToParticipate: this.options.minLevelToParticipate,
                 maxXpToParticipate: this.options.maxXpToParticipate,
                 maxLevelToParticipate: this.options.maxLevelToParticipate,
+                pointAmountToAdd: !this.options.pointAmountToAdd || typeof this.options.pointAmountToAdd === "string" ? this.options.pointAmountToAdd : serialize(this.options.pointAmountToAdd),
                 xpAmountToAdd: !this.options.xpAmountToAdd || typeof this.options.xpAmountToAdd === "string" ? this.options.xpAmountToAdd : serialize(this.options.xpAmountToAdd),
                 voiceTimeToAdd: !this.options.voiceTimeToAdd || typeof this.options.voiceTimeToAdd === "string" ? this.options.voiceTimeToAdd : serialize(this.options.voiceTimeToAdd),
                 voiceTimeTrackingEnabled: this.options.voiceTimeTrackingEnabled,
                 levelingTrackingEnabled: this.options.levelingTrackingEnabled,
+                coinTrackingEnabled: this.options.coinTrackingEnabled,
                 levelMultiplier: !this.options.levelMultiplier || typeof this.options.levelMultiplier === "string" ? this.options.levelMultiplier : serialize(this.options.levelMultiplier)
             }
         };
@@ -195,6 +239,14 @@ class Config extends EventEmitter {
     }
 
     /**
+     * The pointAmountToAdd function
+     * @type {Function}
+     */
+     get pointAmountToAddFunction() {
+        return this.options.pointAmountToAdd ? (typeof this.options.pointAmountToAdd === "string" && this.options.pointAmountToAdd.includes("function anonymous") ? eval(`(${this.options.pointAmountToAdd})`) : eval(this.options.pointAmountToAdd)) : null;
+    }
+
+    /**
      * The xpAmountToAdd function
      * @type {Function}
      */
@@ -208,6 +260,14 @@ class Config extends EventEmitter {
      */
     get voiceTimeToAddFunction() {
         return this.options.voiceTimeToAdd ? (typeof this.options.voiceTimeToAdd === "string" && this.options.voiceTimeToAdd.includes("function anonymous") ? eval(`(${this.options.voiceTimeToAdd})`) : eval(this.options.voiceTimeToAdd)) : null;
+    }
+
+    /**
+     * The levelMultiplier function
+     * @type {Function}
+     */
+     get pointMultiplierFunction() {
+        return this.options.pointMultiplier ? (typeof this.options.pointMultiplier === "string" && this.options.pointMultiplier.includes("function anonymous") ? eval(`(${this.options.pointMultiplier})`) : eval(this.options.pointMultiplier)) : null;
     }
 
     /**
@@ -260,6 +320,29 @@ class Config extends EventEmitter {
     }
 
     /**
+     * Function for pointAmountToAdd. If not provided, the default value is used (Math.floor(Math.random() * 5) + 1).
+     * @returns {Promise<number>}
+     */
+     async pointAmountToAdd() {
+        if (typeof this.pointAmountToAddFunction === "function") {
+            try {
+                const result = await this.pointAmountToAddFunction();
+                if (typeof result === "number") return result;
+                else return Math.floor(Math.random() * 5) + 1;
+            } catch (err) {
+                console.error(`pointAmountToAdd Config Error\n${serialize(this.pointAmountToAddFunction)}\n${err}`);
+                return Math.floor(Math.random() * 5) + 1;
+            }
+        }
+        if (typeof this.manager.options.default.pointAmountToAdd === "function") {
+            const result = await this.manager.options.default.pointAmountToAdd();
+            if (typeof result === "number") return result;
+            else return Math.floor(Math.random() * 5) + 1;
+        }
+        return Math.floor(Math.random() * 5) + 1;
+    }
+    
+    /**
      * Function for xpAmountToAdd. If not provided, the default value is used (Math.floor(Math.random() * 10) + 1).
      * @returns {Promise<number>}
      */
@@ -309,6 +392,29 @@ class Config extends EventEmitter {
      * Function for levelMultiplier. If not provided, the default value is used (0.1).
      * @returns {Promise<number>}
      */
+     async pointMultiplier() {
+        if (typeof this.pointMultiplierFunction === "function") {
+            try {
+                const result = await this.pointMultiplierFunction();
+                if (typeof result === "number") return result;
+                else return 0.1;
+            } catch (err) {
+                console.error(`pointMultiplier Config Error\n${serialize(this.pointMultiplierFunction)}\n${err}`);
+                return 0.1;
+            }
+        }
+        if (typeof this.manager.options.default.pointMultiplier === "function") {
+            const result = await this.manager.options.default.pointMultiplier();
+            if (typeof result === "number") return result;
+            else return 0.1;
+        }
+        return 0.1;
+    }
+
+    /**
+     * Function for levelMultiplier. If not provided, the default value is used (0.1).
+     * @returns {Promise<number>}
+     */
     async levelMultiplier() {
         if (typeof this.levelMultiplierFunction === "function") {
             try {
@@ -340,8 +446,12 @@ class Config extends EventEmitter {
         if (!this.trackBots && member.user.bot) return false;
         if (!this.trackMute && (member.voice.selfMute || member.voice.serverMute)) return false;
         if (!this.trackDeaf && (member.voice.selfDeaf || member.voice.serverDeaf)) return false;
+        if (this.minPointToParticipate && member.data.data.coinData.point < this.minPointToParticipate) return false;
+        if (this.minCoinToParticipate > 0 && member.data.data.coinData.coin < this.minCoinToParticipate) return false;
         if (this.minXpToParticipate && member.data.data.levelingData.xp < this.minXpToParticipate) return false;
         if (this.minLevelToParticipate > 0 && member.data.data.levelingData.level < this.minLevelToParticipate) return false;
+        if (this.maxPointToParticipate > 0 && member.data.data.coinData.point > this.maxPointToParticipate) return false;
+        if (this.maxCoinToParticipate > 0 && member.data.data.coinData.coin > this.maxCoinToParticipate) return false;
         if (this.maxXpToParticipate > 0 && member.data.data.levelingData.xp > this.maxXpToParticipate) return false;
         if (this.maxLevelToParticipate > 0 && member.data.data.levelingData.level > this.maxLevelToParticipate) return false;
         return true;
@@ -377,18 +487,26 @@ class Config extends EventEmitter {
             if (typeof options.newTrackDeaf === "boolean") this.options.trackDeaf = options.newTrackDeaf;
             if (Number.isInteger(options.newMinUserCountToParticipate)) this.options.minUserCountToParticipate = options.newMinUserCountToParticipate;
             if (Number.isInteger(options.newMaxUserCountToParticipate)) this.options.maxUserCountToParticipate = options.newMaxUserCountToParticipate;
+            if (Number.isInteger(options.newMinPointToParticipate)) this.options.minPointToParticipate = options.newMinXpToParticipate;
+            if (Number.isInteger(options.newMinCoinToParticipate)) this.options.minCoinToParticipate = options.newMinLevelToParticipate;
             if (Number.isInteger(options.newMinXpToParticipate)) this.options.minXpToParticipate = options.newMinXpToParticipate;
             if (Number.isInteger(options.newMinLevelToParticipate)) this.options.minLevelToParticipate = options.newMinLevelToParticipate;
+            if (Number.isInteger(options.newMaxPointToParticipate)) this.options.maxPointToParticipate = options.newMaxPointToParticipate;
+            if (Number.isInteger(options.newMaxCoinToParticipate)) this.options.maxCoinToParticipate = options.newMaxCoinToParticipate;
             if (Number.isInteger(options.newMaxXpToParticipate)) this.options.maxXpToParticipate = options.newMaxXpToParticipate;
             if (Number.isInteger(options.newMaxLevelToParticipate)) this.options.maxLevelToParticipate = options.newMaxLevelToParticipate;
+            if (typeof options.newPointAmountToAdd === "string" && options.newPointAmountToAdd.includes("function anonymous")) this.options.pointAmountToAdd = options.newPointAmountToAdd;
             if (typeof options.newXpAmountToAdd === "string" && options.newXpAmountToAdd.includes("function anonymous")) this.options.xpAmountToAdd = options.newXpAmountToAdd;
             if (typeof options.newVoiceTimeToAdd === "string" && options.newVoiceTimeToAdd.includes("function anonymous")) this.options.voiceTimeToAdd = options.newVoiceTimeToAdd;
             if (typeof options.newVoiceTimeTrackingEnabled === "boolean") this.options.voiceTimeTrackingEnabled = options.newVoiceTimeTrackingEnabled;
             if (typeof options.newLevelingTrackingEnabled === "boolean") this.options.levelingTrackingEnabled = options.newLevelingTrackingEnabled;
+            if (typeof options.newCoinTrackingEnabled === "boolean") this.options.coinTrackingEnabled = options.newCoinTrackingEnabled;
+            if (typeof options.newPointMultiplier === "string" && options.newPointMultiplier.includes("function anonymous")) this.options.pointMultiplier = options.newPointMultiplier;
             if (typeof options.newLevelMultiplier === "string" && options.newLevelMultiplier.includes("function anonymous")) this.options.levelMultiplier = options.newLevelMultiplier;
             await this.manager.editConfig(this.guildId, this.data);
             resolve(this);
         });
     }
 }
+
 module.exports = Config;
