@@ -16,6 +16,7 @@
         "ESNext.Symbol"
       ],
       "sourceMap": false,
-      "skipDefaultLibCheck": true
+      "skipDefaultLibCheck": true,
+      "typeRoots": ["./node_modules/@types", "./typings"]
     }
 }
