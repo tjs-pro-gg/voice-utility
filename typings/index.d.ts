@@ -181,7 +181,7 @@ declare module "voice-utility" {
     }
     interface UserOptions {
         voiceTime: {
-            channels: UserVoiceTimeChannelsOptions;
+            channels: UserVoiceTimeChannelsOptions[];
             total: number;
         };
         levelingData: {
@@ -198,7 +198,7 @@ declare module "voice-utility" {
         voiceTime: number;
     }
     interface UserVoiceTimeOptions {
-        channels: [UserOptions];
+        channels: UserVoiceTimeChannelsOptions[];
         total: number;
     }
     interface UserLevelingOptions {
