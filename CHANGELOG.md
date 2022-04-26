@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.8](https://github.com/tjs-pro-gg/voice-utility/compare/v1.1.7...v1.1.8) (2022-04-26)
+
+
+### Bug Fixes
+
+* fix incorrect type of channels ([660a0b9](https://github.com/tjs-pro-gg/voice-utility/commit/660a0b928fe9e05b2661d81388c6a773726ac730))
+
 ### [1.1.7](https://github.com/tjs-pro-gg/voice-utility/compare/v1.1.6...v1.1.7) (2022-04-24)
 
 
