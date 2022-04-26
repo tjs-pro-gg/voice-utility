@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.9](https://github.com/tjs-pro-gg/voice-utility/compare/v1.1.8...v1.1.9) (2022-04-26)
+
+
+### Bug Fixes
+
+* fix incorrect tipe for channelId ([37ef06b](https://github.com/tjs-pro-gg/voice-utility/commit/37ef06b8463a841566f79f586611d6511efecc24))
+
+
+### Enhancements
+
+* change to npm from yarn ([957ffd2](https://github.com/tjs-pro-gg/voice-utility/commit/957ffd269afc8ecf3e727e93895f3833a1122f17))
+* **deps:** pin dependency standard-version to 9.3.2 ([#5](https://github.com/tjs-pro-gg/voice-utility/issues/5)) ([6c67ef4](https://github.com/tjs-pro-gg/voice-utility/commit/6c67ef4ac623ef0271a13c0b912b886948a16806))
+
 ### [1.1.8](https://github.com/tjs-pro-gg/voice-utility/compare/v1.1.7...v1.1.8) (2022-04-26)
 
 
