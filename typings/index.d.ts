@@ -194,7 +194,7 @@ declare module "voice-utility" {
         }
     }
     interface UserVoiceTimeChannelsOptions {
-        channelId: number;
+        channelId: string;
         voiceTime: number;
     }
     interface UserVoiceTimeOptions {
