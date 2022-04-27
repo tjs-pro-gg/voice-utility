@@ -126,10 +126,10 @@ declare module "voice-utility" {
         guildId: Snowflake;
         trackBots: boolean;
         trackAllChannels: boolean;
-        exemptChannels: string | ((channel?: VoiceChannel) => boolean | Promise<boolean>);
+        exemptChannels: Snowflake[]
         channelIds: Snowflake[];
         exemptPermissions: PermissionResolvable[];
-        exemptMembers: string | ((member?: GuildMember) => boolean | Promise<boolean>);
+        exemptMembers: Snowflake[]
         trackMute: boolean;
         trackDeaf: boolean;
         minUserCountToParticipate: number;
