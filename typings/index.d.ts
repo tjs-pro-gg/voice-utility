@@ -128,7 +128,7 @@ declare module "voice-utility" {
         trackAllChannels: boolean;
         exemptChannels: Snowflake[]
         channelIds: Snowflake[];
-        exemptPermissions: PermissionResolvable[];
+        exemptPermissions: string[];
         exemptMembers: Snowflake[]
         trackMute: boolean;
         trackDeaf: boolean;
