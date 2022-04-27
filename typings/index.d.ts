@@ -119,8 +119,8 @@ declare module "voice-utility" {
         voiceTimeTrackingEnabled?: boolean;
         levelingTrackingEnabled?: boolean;
         coinTrackingEnabled?: boolean;
-        pointMultiplier: () => number | Promise<number>;
-        levelMultiplier: () => number | Promise<number>;
+        pointMultiplier?: () => number | Promise<number>;
+        levelMultiplier?: () => number | Promise<number>;
     }
     interface ConfigData {
         guildId: Snowflake;
