@@ -97,10 +97,10 @@ declare module "voice-utility" {
     interface ConfigOptions {
         trackBots?: boolean;
         trackAllChannels?: boolean;
-        exemptChannels?: (channel?: VoiceChannel) => boolean | Promise<boolean>;
+        exemptChannels?: Snowflake[]
         channelIds?: Snowflake[];
         exemptPermissions?: PermissionResolvable[];
-        exemptMembers?: (member?: GuildMember) => boolean | Promise<boolean>;
+        exemptMembers?: Snowflake[];
         trackMute?: boolean;
         trackDeaf?: boolean;
         minUserCountToParticipate?: number;
