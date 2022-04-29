@@ -80,10 +80,10 @@ exports.defaultVoiceManagerOptions = {
  *
  * @property {Boolean} [trackBots=false] Whether bots are able to be tracked.
  * @property {Boolean} [trackAllChannels=true] Whether to track all of the guild's voice channels.
- * @property {Function} [exemptChannels] Function to filter channels. If true is returned, the channel won't be tracked.
+ * @property {Snowflake[]} [exemptChannels] Function to filter channels. If true is returned, the channel won't be tracked.
  * @property {Snowflake[]} [channelIds=[]] The channels to track (if trackAllChannels is true this will be ignored).
  * @property {PermissionResolvable[]} [exemptPermissions=[]] Members with any of these permissions won't be tracked.
- * @property {Function} [exemptMembers] Function to filter members. If true is returned, the member won't be tracked.
+ * @property {Snowflake[]} [exemptMembers] Function to filter members. If true is returned, the member won't be tracked.
  * @property {Boolean} [trackMute=true] Whether members who are muted should be tracked.
  * @property {Boolean} [trackDeaf=true] Whether members who are deafened should be tracked.
  * @property {number} [minUserCountToParticipate="0"] The min amount of users to be in a channel to be tracked (0 is equal to no limit).

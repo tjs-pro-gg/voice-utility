@@ -30,7 +30,7 @@ class Config extends EventEmitter {
          * The config data
          * @type {ConfigOptions}
          */
-        this.options = options.data;
+        this.options = options;
     }
 
     /**
