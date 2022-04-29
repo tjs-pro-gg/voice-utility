@@ -2,7 +2,7 @@ const merge = require("deepmerge");
 const Discord = require("discord.js");
 const serialize = require("serialize-javascript");
 const { EventEmitter } = require("events");
-const { UserOptions, UserVoiceTimeOptions, UserLevelingOptions, UserData, UserEditOptions, channelAndMemberOptions } = require("./Constants.js");
+const { UserOptions, UserVoiceTimeOptions, UserLevelingOptions, UserData, UserEditOptions, channelAndMemberOptions, UserCoinOptions } = require("./Constants.js");
 const VoiceManager = require("./Manager.js");
 
 /**
@@ -45,6 +45,11 @@ class User extends EventEmitter {
          * @type {UserLevelingOptions}
          */
         this.levelingData = options.data.levelingData;
+        /**
+         * The user leveling options
+         * @type {UserCoinOptions}
+         */
+         this.levelingData = options.data.coinData;
         /**
          * The user options
          * @type {UserOptions}
