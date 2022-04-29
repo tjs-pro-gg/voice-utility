@@ -150,10 +150,12 @@ class VoiceManager extends EventEmitter {
             if (!guildId) {
                 return reject(`guildId is not a valid guild. (val=${guildId})`);
             }
+            console.log(options)
             const config = new Config(this, {
                 guildId: guildId,
                 data: options
             });
+            console.log(config);
             this.configs.push(config);
             await this.saveConfig(guildId, config.data);
             resolve(config);
