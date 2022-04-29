@@ -49,7 +49,7 @@ class User extends EventEmitter {
          * The user leveling options
          * @type {UserCoinOptions}
          */
-         this.levelingData = options.data.coinData;
+         this.coinData = options.data.coinData;
         /**
          * The user options
          * @type {UserOptions}
