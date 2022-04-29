@@ -130,7 +130,8 @@ class User extends EventEmitter {
             guildId: this.guildId,
             data: {
                 voiceTime: this.voiceTime,
-                levelingData: this.levelingData
+                levelingData: this.levelingData,
+                coinData: this.coinData
             }
         };
         return baseData;
@@ -145,6 +146,7 @@ class User extends EventEmitter {
         return new Promise(async (resolve, reject) => {
             if (typeof options.newVoiceTime === "object" && Array.isArray(options.newVoiceTime.channels) && Number.isInteger(options.newVoiceTime.total)) this.voiceTime = options.newVoiceTime;
             if (typeof options.newLevelingData === "object" && Number.isInteger(options.newLevelingData.xp) && Number.isInteger(options.newLevelingData.level)) this.levelingData = options.newLevelingData;
+            if (typeof options.newCoinData === "object" && Number.isInteger(options.newCoinData.point) && Number.isInteger(options.newCoinData.coin)) this.coinData = options.newCoinData;
             await this.manager.editUser(this.userId, this.guildId, this.data);
             resolve(this);
         });
