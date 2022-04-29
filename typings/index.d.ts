@@ -97,10 +97,10 @@ declare module "voice-utility" {
     interface ConfigOptions {
         trackBots?: boolean;
         trackAllChannels?: boolean;
-        exemptChannels?: Snowflake[]
+        exemptChannels?: (channel?: VoiceChannel) => boolean | Promise<boolean>;
         channelIds?: Snowflake[];
-        exemptPermissions?: string[];
-        exemptMembers?: Snowflake[];
+        exemptPermissions?: PermissionResolvable[];
+        exemptMembers?: (member?: GuildMember) => boolean | Promise<boolean>;
         trackMute?: boolean;
         trackDeaf?: boolean;
         minUserCountToParticipate?: number;
@@ -119,17 +119,17 @@ declare module "voice-utility" {
         voiceTimeTrackingEnabled?: boolean;
         levelingTrackingEnabled?: boolean;
         coinTrackingEnabled?: boolean;
-        pointMultiplier?: () => number | Promise<number>;
-        levelMultiplier?: () => number | Promise<number>;
+        pointMultiplier: () => number | Promise<number>;
+        levelMultiplier: () => number | Promise<number>;
     }
     interface ConfigData {
         guildId: Snowflake;
         trackBots: boolean;
         trackAllChannels: boolean;
-        exemptChannels: Snowflake[]
+        exemptChannels: (channel?: VoiceChannel) => boolean | Promise<boolean>;
         channelIds: Snowflake[];
-        exemptPermissions: string[];
-        exemptMembers: Snowflake[]
+        exemptPermissions: PermissionResolvable[];
+        exemptMembers: (member?: GuildMember) => boolean | Promise<boolean>;
         trackMute: boolean;
         trackDeaf: boolean;
         minUserCountToParticipate: number;
