@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.11](https://github.com/tjs-pro-gg/voice-utility/compare/v1.1.10...v1.1.11) (2022-04-29)
+
+
+### Bug Fixes
+
+* coinData does not exist ([cc8a9fe](https://github.com/tjs-pro-gg/voice-utility/commit/cc8a9fe54ff8ea506fff007f152fa423be35e692))
+* coinData is not exist ([930f656](https://github.com/tjs-pro-gg/voice-utility/commit/930f65679e513f4f4389d753d5b1648d9c4385c2))
+* fix the user coin not writed to database ([69cadb7](https://github.com/tjs-pro-gg/voice-utility/commit/69cadb742962e2e5a9732fd999e1b9a5e61f44e6))
+* reverting back types ([bab7ba8](https://github.com/tjs-pro-gg/voice-utility/commit/bab7ba8633b97a74780e00a70182c9e648612fc1))
+* valid types for ConfigOptions ([025886f](https://github.com/tjs-pro-gg/voice-utility/commit/025886f689596ab6789ec48b9065896c731f60dc))
+
 ### [1.1.10](https://github.com/tjs-pro-gg/voice-utility/compare/v1.1.9...v1.1.10) (2022-04-27)
 
 
