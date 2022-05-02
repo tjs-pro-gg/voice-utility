@@ -513,13 +513,13 @@ class VoiceManager extends EventEmitter {
                     this.emit("userPointAdd", oldUser, user);
                     if (user.coinData.coin > oldUser.coinData.coin) {
                         /**
-                         * Emitted when the user coins up.
-                         * @event VoiceManager#userCoinUp
+                         * Emitted when the user coins add.
+                         * @event VoiceManager#userCoinAdd
                          * @param {User} oldUser The user before the update
                          * @param {User} newUser The user after the update
                          *
                          */
-                        this.emit("userCoinUp", oldUser, user);
+                        this.emit("userCoinAdd", oldUser, user);
                     }
                 }
                 await this.editUser(user.userId, user.guildId, user.data);
