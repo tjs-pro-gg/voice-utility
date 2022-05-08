@@ -1,3 +1,6 @@
+# Read carefully before you continue!
+This is just a copy of **[discord-voice](https://github.com/discord-voice/discord-voice)** and has been modified to suit our needs, You should go there because it was the official version of this copy. You will not get any support here.
+
 # What is Voice Utility?
 
 > Voice Utility is a powerful [Node.js](https://nodejs.org/) module that allows you to easily track the user's voice time and levels!
