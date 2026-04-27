@@ -18,7 +18,7 @@
   "dependencies": {
     "deepmerge": "4.2.2",
     "lodash": "4.17.21",
-    "serialize-javascript": "6.0.0"
+    "serialize-javascript": "6.0.2"
   },
   "devDependencies": {
     "@types/node": "17.0.25",
